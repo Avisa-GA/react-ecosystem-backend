@@ -1,5 +1,6 @@
 import express from "express";
 import mongoose from "mongoose";
+import routes from "./routes/todoRoutes";
 import bodyParser from "body-parser";
 import cors from "cors";
 const app = express();
@@ -19,6 +20,8 @@ app.use(bodyParser.json());
 
 // cors setup
 app.use(cors());
+
+routes(app);
 
 app.get("/", (req, res) => {
   res.send(`Our application is running on ${PORT}`);
