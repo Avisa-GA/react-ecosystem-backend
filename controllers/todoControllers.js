@@ -18,3 +18,35 @@ export const getTodosList = (req, res) => {
     res.json(todos);
   });
 };
+
+export const getTodoById = (req, res) => {
+  Todo.findById(req.params.todoId, (err, todo) => {
+    if (err) {
+      res.send(err);
+    }
+    res.json(todo);
+  });
+};
+
+export const updateTodoById = (req, res) => {
+  Todo.findOneAndUpdate(
+    { id: req.params.todoId },
+    req.body,
+    { new: true },
+    (err, todo) => {
+      if (err) {
+        res.send(err);
+      }
+      res.json(todo);
+    }
+  );
+};
+
+export const deleteTodo = (req, res) => {
+  Todo.remove({ id: req.params.todoId }, (err, todo) => {
+    if (err) {
+      res.send(err);
+    }
+    res.json({ message: "Sucessfully deleted todo!" });
+  });
+};
